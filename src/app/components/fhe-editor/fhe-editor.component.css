@@ -1,0 +1,18 @@
+.aa > .mat-grid-tile-content {
+    justify-content: left;
+}
+
+.xx{
+    background-color: cyan;
+    width: 100%;
+}
+
+
+.notes-form {
+    min-width: 150px;
+    width: 100%;
+  }
+  
+.notes-full-width {
+    width: 100%;
+}

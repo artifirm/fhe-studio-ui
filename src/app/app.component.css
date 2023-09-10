@@ -1,0 +1,21 @@
+.cyan {
+    background-color: #00bcd4!important;
+}
+.is-active {
+    background-color: whitesmoke;
+    color: black;
+}
+.main-toolbar{
+    background-color: white;
+}
+.example-sidenav {
+    background-color: #a6d1d7;
+}
+.mat-list-base .mat-list-item {
+    color: #dcdcdc;
+    font-family: Quicksand,Georgia,"Times New Roman",Times,serif;
+    font-size: 20px;
+}
+.parent {
+ margin: 1vh;   
+}

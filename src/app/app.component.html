@@ -1,0 +1,69 @@
+<!-- <div class="container cyan"> -->
+  <mat-toolbar class="main-toolbar">
+    <button mat-icon-button (click)="isExpanded = !isExpanded">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <h1>Fully Homomorfic Encryption Studio</h1>
+    <span style="flex: 1 1 auto;"></span>
+    <div>
+        <button mat-icon-button style="width:auto" [matMenuTriggerFor]="accountMenu">
+            <mat-icon>account_circle</mat-icon>
+            {{ currentUserEmail$ | async }}
+        </button>
+        <div fxFlex="5px"></div>
+        <mat-menu #accountMenu [overlapTrigger]="false" yPosition="below">
+            <button mat-menu-item (click)="login()" *ngIf="!(currentUserEmail$ | async)">
+                <mat-icon>login</mat-icon>Login
+            </button>
+            <button mat-menu-item (click)="logout()" *ngIf="currentUserEmail$ | async">
+                <mat-icon>exit_to_app</mat-icon>Logout
+            </button>
+        </mat-menu>
+    </div>
+    <div fxFlex="25px"></div>
+</mat-toolbar>
+<mat-sidenav-container class="example-container" autosize>
+    <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" *ngIf="isExpanded">
+        <mat-nav-list>
+            <mat-list-item >
+                <button mat-flat-button [routerLink]="'fhe-editor'">
+                    <mat-icon>apps</mat-icon>
+                    New Circuit
+                  </button>
+            </mat-list-item>
+
+            <mat-list-item >
+                <button mat-flat-button [routerLink]="'circuits-zoo'">
+                    <mat-icon>apps</mat-icon>
+                    Circuits Zoo
+                  </button>
+            </mat-list-item>
+
+            <mat-list-item >
+                <button mat-flat-button >
+                    <mat-icon>apps</mat-icon>
+                    My Circuits
+                  </button>
+            </mat-list-item>
+
+        </mat-nav-list>
+     </mat-sidenav>
+
+    <router-outlet></router-outlet>
+    <footer style="padding: 1vw;">
+        <p>&copy; <a href="http://artifirm.com"> Artifirm Inc. 2023</a></p>
+        <p style="line-height:10px; font-size: 10px; color: darkgray;">Disclaimers<br>
+            The information provided on the FHE Studio website is for general informational purposes only. While we strive to keep the information up to date and accurate, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on the website for any purpose.
+            Any reliance you place on such information is therefore strictly at your own risk. In no event will we be liable for any loss or damage, including but not limited to indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of or in connection with the use of this website.
+            Through this website, you can link to other websites that are not under the control of Encryption Studio. We have no control over the nature, content, and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorsement of the views expressed within them.
+            Every effort is made to keep the website up and running smoothly. However, Encryption Studio takes no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.
+            Please be aware that cybersecurity and encryption technology are constantly evolving fields, and while we provide information to the best of our knowledge, it may not always reflect the most current developments or best practices. It is essential to seek professional advice and stay informed about the latest updates in the field of encryption and cybersecurity.
+            By using our website, you agree to abide by this disclaimer. If you do not agree with any part of this disclaimer, please do not use our website. This disclaimer is subject to change without notice.
+            
+        </p>
+      </footer>
+</mat-sidenav-container>
+
+
+
+<!-- </div> -->

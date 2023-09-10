@@ -1,0 +1,26 @@
+<h1>FHE Circuit</h1>
+
+<p *ngIf="!spinning">&nbsp;<span *ngIf="!editNotes">{{ name }}</span>
+  <button mat-icon-button aria-label="rename curcuit" style="vertical-align: bottom;" (click)="editNotes = !editNotes">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" (click)="save()">
+    <mat-icon>save</mat-icon>
+    Save
+  </button>
+</p>
+<form [formGroup]="notesForm" class="notes-form" *ngIf="editNotes" >
+  <mat-form-field class="notes-full-width">
+    <mat-label>Circuit Name</mat-label>
+    <input matInput placeholder="name of the curcuit" formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field class="notes-full-width">
+    <mat-label>Description</mat-label>
+    <textarea matInput placeholder="curcuit details..." formControlName="description"></textarea>
+  </mat-form-field>
+</form>
+<p *ngIf="spinning"><mat-spinner></mat-spinner></p>
+<ngs-code-editor style="height: 60vh;" [theme]="theme" [codeModel]="codeModel" [options]="options">
+</ngs-code-editor>
