@@ -26,13 +26,6 @@
     <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" *ngIf="isExpanded">
         <mat-nav-list>
             <mat-list-item >
-                <button mat-flat-button [routerLink]="'fhe-editor'">
-                    <mat-icon>apps</mat-icon>
-                    New Circuit
-                  </button>
-            </mat-list-item>
-
-            <mat-list-item >
                 <button mat-flat-button [routerLink]="'circuits-zoo'">
                     <mat-icon>apps</mat-icon>
                     Circuits Zoo
@@ -40,12 +33,25 @@
             </mat-list-item>
 
             <mat-list-item >
-                <button mat-flat-button >
+                <button mat-flat-button [routerLink]="'fhe-editor'">
                     <mat-icon>apps</mat-icon>
-                    My Circuits
+                    New Circuit
                   </button>
             </mat-list-item>
 
+            <mat-list-item >
+                <button mat-flat-button >
+                    <mat-icon>apps</mat-icon>
+                    FHE Vault
+                  </button>
+            </mat-list-item>
+
+            <mat-list-item >
+                <button mat-flat-button >
+                    <mat-icon>apps</mat-icon>
+                    API Keys
+                  </button>
+            </mat-list-item>
         </mat-nav-list>
      </mat-sidenav>
 

@@ -5,10 +5,21 @@
     <mat-icon>more_vert</mat-icon>
   </button>
 
-  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" (click)="save()">
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" (click)="save()" >
     <mat-icon>save</mat-icon>
     Save
   </button>
+
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;">
+    <mat-icon>lock</mat-icon>
+    Add to Vault 
+  </button>
+
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;">
+    <mat-icon>delete</mat-icon>
+    Delete
+  </button>
+
 </p>
 <form [formGroup]="notesForm" class="notes-form" *ngIf="editNotes" >
   <mat-form-field class="notes-full-width">
