@@ -10,12 +10,12 @@
     Save
   </button>
 
-  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;">
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" (click)="addToVault()" *ngIf="persitedId">
     <mat-icon>lock</mat-icon>
     Add to Vault 
   </button>
 
-  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;">
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" *ngIf="persitedId">
     <mat-icon>delete</mat-icon>
     Delete
   </button>

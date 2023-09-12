@@ -14,6 +14,8 @@ import { LoginComponent } from './components/login/login.component';
 import { Oauth2CallbackComponent } from './components/oauth2-callback/oauth2-callback.component';
 import { FheCircuitsZooComponent } from './components/fhe-circuits-zoo/fhe-circuits-zoo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FheVaultComponent } from './components/fhe-vault/fhe-vault.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FheEditorComponent,
     LoginComponent,
     Oauth2CallbackComponent,
-    FheCircuitsZooComponent
+    FheCircuitsZooComponent,
+    FheVaultComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +36,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     CodeEditorModule.forRoot(),
     HttpClientModule,
+
   ],
   providers: [httpOAuth2Provider],
   bootstrap: [AppComponent]

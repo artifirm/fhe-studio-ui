@@ -3,7 +3,7 @@
     <button mat-icon-button (click)="isExpanded = !isExpanded">
         <mat-icon>menu</mat-icon>
     </button>
-    <h1>Fully Homomorfic Encryption Studio</h1>
+    <a  mat-button [routerLink]="['']"><h1>Homomorfic Encryption Studio</h1></a>
     <span style="flex: 1 1 auto;"></span>
     <div>
         <button mat-icon-button style="width:auto" [matMenuTriggerFor]="accountMenu">
@@ -26,29 +26,29 @@
     <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" *ngIf="isExpanded">
         <mat-nav-list>
             <mat-list-item >
-                <button mat-flat-button [routerLink]="'circuits-zoo'">
+                <button mat-flat-button [routerLink]="'circuits-zoo'" color="primary" style="width: 100%;">
                     <mat-icon>apps</mat-icon>
                     Circuits Zoo
                   </button>
             </mat-list-item>
 
             <mat-list-item >
-                <button mat-flat-button [routerLink]="'fhe-editor'">
-                    <mat-icon>apps</mat-icon>
+                <button mat-flat-button [routerLink]="'fhe-editor'" style="width: 100%;">
+                    <mat-icon>edit_square</mat-icon>
                     New Circuit
                   </button>
             </mat-list-item>
 
             <mat-list-item >
-                <button mat-flat-button >
-                    <mat-icon>apps</mat-icon>
+                <button mat-flat-button [routerLink]="'fhe-vault'" style="width: 100%;">
+                    <mat-icon>lock</mat-icon>
                     FHE Vault
                   </button>
             </mat-list-item>
 
-            <mat-list-item >
-                <button mat-flat-button >
-                    <mat-icon>apps</mat-icon>
+            <mat-list-item>
+                <button mat-flat-button  style="width: 100%;">
+                    <mat-icon>api</mat-icon>
                     API Keys
                   </button>
             </mat-list-item>

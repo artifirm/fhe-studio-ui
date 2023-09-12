@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CodeModel } from '@ngstack/code-editor';
 import { firstValueFrom } from 'rxjs';
 import { AuthenticationService } from 'src/services/authentication-service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-fhe-editor',
@@ -42,6 +44,7 @@ inputset = range(10)`,
   notesForm!: UntypedFormGroup;
 
   constructor(
+    private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
@@ -112,6 +115,20 @@ inputset = range(10)`,
           }));
     } finally {
       this.spinning = false;
+    }
+  }
+
+  async addToVault() {
+    const res = await firstValueFrom(this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '400px',
+      data: {
+        title: 'Vault',
+        message: 'Create a new secret and evaluation key for this cirucit ?'
+      }
+    }).afterClosed());
+
+    if (res) {
+      this.router.navigate(['fhe-vault']);
     }
   }
 }
