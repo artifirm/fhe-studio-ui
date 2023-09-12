@@ -20,7 +20,7 @@ export class FheVaultComponent {
   async ngOnInit() {
     this.spinning = true;
     try {
-      const r = await firstValueFrom(this.http.get<any>(`vault`));
+      const r = await firstValueFrom(this.http.post<any>(`vault`, {}));
       this.dataSource = r;
     } finally {
       this.spinning = false;
