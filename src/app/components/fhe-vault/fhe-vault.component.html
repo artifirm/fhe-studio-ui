@@ -1,3 +1,4 @@
+<h1>&nbsp;Key Vault</h1>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
@@ -13,14 +14,15 @@
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> 
-        <button mat-stroked-button color="accent">Run Circuit</button>
+        <button mat-stroked-button color="accent" (click)="runCircuit(element.id)">Run Circuit</button> &nbsp;
+        <button mat-button><mat-icon>delete</mat-icon></button>
         <!-- <a [routerLink]="['/fhe-editor']" [queryParams]="{id: element.id}">
           {{element.name}}
         </a> -->
       </td>
     </ng-container>
   
-    <!-- Email Column -->
+    Email Column
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef> Email </th>
       <td mat-cell *matCellDef="let element"> {{element.email}} </td>

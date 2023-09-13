@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { RunVaultComponent } from '../run-vault/run-vault.component';
 
 @Component({
   selector: 'app-fhe-vault',
@@ -14,6 +16,7 @@ export class FheVaultComponent {
   spinning = false;
   
   constructor(
+    private dialog: MatDialog,
     private router: Router,
     private http: HttpClient) {}
   
@@ -25,5 +28,14 @@ export class FheVaultComponent {
     } finally {
       this.spinning = false;
     }
+  }
+
+  async runCircuit(id: string) {
+    await firstValueFrom(this.dialog.open(RunVaultComponent, {
+      maxWidth: '400px',
+      data: {
+        id
+      }
+    }).afterClosed());
   }
 }

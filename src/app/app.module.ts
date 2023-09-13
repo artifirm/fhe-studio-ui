@@ -16,6 +16,7 @@ import { FheCircuitsZooComponent } from './components/fhe-circuits-zoo/fhe-circu
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FheVaultComponent } from './components/fhe-vault/fhe-vault.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { RunVaultComponent } from './components/run-vault/run-vault.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     Oauth2CallbackComponent,
     FheCircuitsZooComponent,
     FheVaultComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    RunVaultComponent
   ],
   imports: [
     BrowserModule,
