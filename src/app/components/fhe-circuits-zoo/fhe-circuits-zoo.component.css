@@ -1,3 +1,20 @@
 table {
     width: 100%;
   }
+
+.tdesc {
+  font-size: small;
+  color: dimgray;
+}
+
+.title {
+  color: blue;
+  font-size: large;
+  text-decoration: none;
+}
+
+a:visited {
+  color: blue;
+  font-style: normal;
+  text-decoration: none;
+}

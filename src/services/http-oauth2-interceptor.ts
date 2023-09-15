@@ -39,9 +39,10 @@ export class HttpOAuth2Interceptor implements HttpInterceptor {
                 if (e.status === 401) {
                     this.authenticationService.logout();
                     this.authenticationService.login();
-                } else {
+                } else if (e.status !== 200) {
                     const error =  new Error(e.message + ' ' + e.error)
                     console.log(e)
+                    alert(e.message);
                     throw error;
                 }
                 return of(e);

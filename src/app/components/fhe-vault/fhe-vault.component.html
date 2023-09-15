@@ -4,15 +4,9 @@
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
   
-    <!-- Position Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> id </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-  
     <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let element"> 
         <button mat-stroked-button color="accent" (click)="runCircuit(element.id)">Run Circuit</button> &nbsp;
         <button mat-button><mat-icon>delete</mat-icon></button>
@@ -22,16 +16,18 @@
       </td>
     </ng-container>
   
-    Email Column
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    <!-- Email Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element">
+              <a class="title" [routerLink]="['/fhe-editor']" [queryParams]="{id: element.circuit_id}">
+        {{element.name}}</a></td>
     </ng-container>
   
      <!-- Email Column -->
      <ng-container matColumnDef="created">
       <th mat-header-cell *matHeaderCellDef> Created </th>
-      <td mat-cell *matCellDef="let element"> {{element.created_time}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.created_time | date: 'short'}} </td>
     </ng-container>
  
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

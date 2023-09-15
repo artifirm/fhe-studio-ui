@@ -11,7 +11,7 @@ import { RunVaultComponent } from '../run-vault/run-vault.component';
   styleUrls: ['./fhe-vault.component.css']
 })
 export class FheVaultComponent {
-  displayedColumns: string[] = ['id', 'name'];
+  displayedColumns: string[] = ['name', 'action', 'created'];
   dataSource = [];
   spinning = false;
   

@@ -11,7 +11,7 @@ import { firstValueFrom } from 'rxjs';
 })
 
 export class FheCircuitsZooComponent implements OnInit{
-  displayedColumns: string[] = ['id', 'name', 'email'];
+  displayedColumns: string[] = ['name', 'email', 'created'];
   dataSource = [];
   spinning = false;
   
@@ -27,5 +27,9 @@ export class FheCircuitsZooComponent implements OnInit{
     } finally {
       this.spinning = false;
     }
+  }
+
+  filterResults(text: string) : void {
+
   }
 }

@@ -15,7 +15,7 @@
     Add to Vault 
   </button>
 
-  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" *ngIf="persitedId">
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" *ngIf="persitedId" (click)="deleteCircuit()">
     <mat-icon>delete</mat-icon>
     Delete
   </button>

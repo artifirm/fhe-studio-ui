@@ -107,7 +107,7 @@ inputset = range(10)`,
     this.spinning = true;
     try {
       const r = await firstValueFrom(
-        this.http.post<any>(`edit-circuit/${this.persitedId}`, 
+        this.http.put<any>(`edit-circuit/${this.persitedId}`, 
           { 
             src : this.codeModel.value,
             name : this.fval['name'].value,
@@ -128,7 +128,25 @@ inputset = range(10)`,
     }).afterClosed());
 
     if (res) {
+      await firstValueFrom(
+        this.http.put<any>(`/add-vault/${this.persitedId}`, {}));
       this.router.navigate(['fhe-vault']);
+    }
+  }
+
+  async deleteCircuit() {
+    const res = await firstValueFrom(this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '400px',
+      data: {
+        title: 'Delete Confirmation',
+        message: 'Do you want to completely delete this circuit ?'
+      }
+    }).afterClosed());
+
+    if (res) {
+      const r = await firstValueFrom(
+        this.http.delete<any>(`/delete-circuit/${this.persitedId}`));
+      this.router.navigate(['']);
     }
   }
 }
