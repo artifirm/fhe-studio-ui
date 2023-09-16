@@ -9,7 +9,7 @@
       <input matInput placeholder="encrypted value" formControlName="param1">
       
     </mat-form-field>
-    <button mat-stroked-button color="accent" style="margin-left: 5px;">Encrypt</button>
+    <button mat-stroked-button color="accent" style="margin-left: 5px;" (click)="encrypt('param1')">Encrypt</button>
 
     <mat-form-field >
         <mat-label>Param 2</mat-label>
@@ -22,5 +22,5 @@
 
 <div mat-dialog-actions>
     <button mat-button>Dismiss</button>
-    <button mat-raised-button color="primary">Run Circuit and Decrypt Result</button>
+    <button mat-raised-button color="primary" (click)="runCircuit()">Run Circuit and Decrypt Result</button>
 </div>
