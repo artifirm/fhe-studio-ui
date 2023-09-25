@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { RunVaultComponent } from '../run-vault/run-vault.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-fhe-vault',
@@ -37,5 +38,21 @@ export class FheVaultComponent {
         id
       }
     }).afterClosed());
+  }
+
+  async deleteVaultItem(id: string) {
+    const res = await firstValueFrom(this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Delete Confirmation',
+        message: 'Do you want to delete this key ?'
+      }
+    }).afterClosed());
+
+    if (res) {
+      const r = await firstValueFrom(
+        this.http.delete<any>(`/delete-vault-item/${id}`));
+        
+        await this.ngOnInit();
+    }
   }
 }
