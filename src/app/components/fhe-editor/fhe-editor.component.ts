@@ -36,8 +36,8 @@ inputset = range(10)`,
     },
   };
 
-  name = ''
   persitedId = ''
+  fheError = ''
 
   spinning = false
   editNotes = false
@@ -64,12 +64,13 @@ inputset = range(10)`,
 
   async reload() {
     let description = '';
+    let name = '';
 
     if (this.persitedId !== ''){
       this.spinning = true;
       const c = await firstValueFrom(this.http.post<any>(`circuit/${this.persitedId}`, {}))
 
-      this.name = c['name'];
+      name = c['name'];
       description = c['description'];
       this.codeModel = {
         language: 'python',
@@ -78,11 +79,11 @@ inputset = range(10)`,
 
       this.spinning = false;
     } else {
-      this.name = this.newName()
+      name = this.newName()
     }
 
     this.notesForm = this.formBuilder.group({
-      name: [this.name, Validators.required],
+      name: [name, Validators.required],
       description,
     });
   }
@@ -98,8 +99,10 @@ inputset = range(10)`,
   }
 
   get fval() { return this.notesForm.controls; }
+  get name()  { return this.fval['name'].value; }
 
   async save() {
+    this.fheError = '';
     if (this.notesForm.invalid) {
       return;
     }
@@ -113,6 +116,7 @@ inputset = range(10)`,
             name : this.fval['name'].value,
             description : this.fval['description'].value
           }));
+          this.fheError = r.exception ?? '';
     } finally {
       this.spinning = false;
     }

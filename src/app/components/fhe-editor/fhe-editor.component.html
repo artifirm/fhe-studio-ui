@@ -33,5 +33,6 @@
   </mat-form-field>
 </form>
 <p *ngIf="spinning"><mat-spinner></mat-spinner></p>
+<p *ngIf="fheError" style="color: red;">{{fheError}}</p>
 <ngs-code-editor style="height: 60vh;" [theme]="theme" [codeModel]="codeModel" [options]="options">
 </ngs-code-editor>
