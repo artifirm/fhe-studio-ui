@@ -17,6 +17,8 @@ export class RunVaultComponent implements OnInit{
   paramsForm =new UntypedFormGroup({});
   id: any;
   paramsDesc: boolean[] = [];
+  stage = -1
+  result = ''
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -59,13 +61,22 @@ export class RunVaultComponent implements OnInit{
   }
 
   async encryptRunDecrypt(): Promise<string[]> {
-
-    const password = this.fval['password'].value;
-    const values = this.paramsDesc.map((a,i) => this.fval[`param${++i}`].value);
-    const encrypted = await this.encrypt(values, password);
-    const executed = await this.runCircuit(encrypted);
-    const decrypted = await this.decrypt(executed, password);
-    return decrypted;
+    this.stage = -1;
+    this.result = ''
+    try {
+      const password = this.fval['password'].value;
+      const values = this.paramsDesc.map((a,i) => this.fval[`param${++i}`].value);
+      this.stage = 0;
+      const encrypted = await this.encrypt(values, password);
+      this.stage = 1;
+      const executed = await this.runCircuit(encrypted);
+      this.stage = 2;
+      const decrypted = await this.decrypt(executed, password);
+      this.result = decrypted;
+      return decrypted;
+    } finally {
+      this.stage = -1;
+    }
   }
   
   async encrypt(values: string[], password: string): Promise<string[]> {

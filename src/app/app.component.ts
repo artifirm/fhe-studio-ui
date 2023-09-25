@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { User } from 'src/model/user';
 import { AuthenticationService } from 'src/services/authentication-service';
@@ -16,6 +17,7 @@ export class AppComponent {
 
   constructor(
     private authenticationService: AuthenticationService,
+    private router: Router,
     ) { }
 
   logout() {
@@ -30,6 +32,10 @@ export class AppComponent {
     return this.authenticationService.currentUserObservable.pipe(
       map(a => a.email)
     );
+  }
+
+  primaryByUrl(url: string[]): string {
+    return url.some(a=> this.router.url === a) ? 'primary' : '';
   }
 
 }

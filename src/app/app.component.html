@@ -26,28 +26,28 @@
     <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" *ngIf="isExpanded">
         <mat-nav-list>
             <mat-list-item style="margin-bottom: 5vh;">
-                <button mat-flat-button [routerLink]="'circuits-zoo'" color="primary" style="width: 100%;">
+                <button mat-flat-button [routerLink]="'circuits-zoo'" [color]="primaryByUrl(['/circuits-zoo','/'])" style="width: 100%;">
                     <mat-icon>apps</mat-icon>
                     Circuits Zoo
                   </button>
             </mat-list-item>
 
             <mat-list-item >
-                <button mat-flat-button [routerLink]="'fhe-editor'" style="width: 100%;">
+                <button mat-flat-button [routerLink]="'fhe-editor'" [color]="primaryByUrl(['/fhe-editor'])" style="width: 100%;">
                     <mat-icon>edit_square</mat-icon>
                     New Circuit
                   </button>
             </mat-list-item>
 
             <mat-list-item >
-                <button mat-flat-button [routerLink]="'fhe-vault'" style="width: 100%;">
+                <button mat-flat-button [routerLink]="'fhe-vault'" [color]="primaryByUrl(['/fhe-vault'])" style="width: 100%;">
                     <mat-icon>lock</mat-icon>
                     FHE Vault
                   </button>
             </mat-list-item>
 
             <mat-list-item>
-                <button mat-flat-button  style="width: 100%;">
+                <button mat-flat-button  style="width: 100%;" [routerLink]="'api-keys'" [color]="primaryByUrl(['/api-keys'])">
                     <mat-icon>api</mat-icon>
                     API Keys
                   </button>

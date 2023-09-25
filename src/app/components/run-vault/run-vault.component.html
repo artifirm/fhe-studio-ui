@@ -17,10 +17,19 @@
       </mat-form-field>
 </form>
 
+<mat-chip-listbox disabled *ngIf="stage >= 0 ">
+  <mat-chip-option color="accent" [selected]="stage === 0">Encrypt</mat-chip-option>
+  <mat-chip-option color="accent" [selected]="stage === 1">Run</mat-chip-option>
+  <mat-chip-option color="accent" [selected]="stage === 2" >Decrypt</mat-chip-option>
+</mat-chip-listbox>
+
+<div *ngIf="result">Result: {{result[0]}}</div>
+
 </div>
 
+<mat-spinner *ngIf="stage >= 0 "></mat-spinner>
 
-<div mat-dialog-actions>
-    <button mat-button>Dismiss</button>
+<div mat-dialog-actions *ngIf="stage < 0 " align="end">
+    <button mat-button mat-dialog-close>Dismiss</button>
     <button mat-raised-button color="primary" (click)="encryptRunDecrypt()">Encrypt, Run, Decrypt!</button>
 </div>

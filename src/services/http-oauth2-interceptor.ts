@@ -10,9 +10,17 @@ import { environment } from 'src/environments/environment';
 @Injectable({ providedIn: 'root' })
 export class HttpOAuth2Interceptor implements HttpInterceptor {
 
-    ByPassUrls = [
+    ByPassFullUrls = [
         environment.oauth2UserInfo,
-        environment.oauth2TokenUrl ];
+        environment.oauth2TokenUrl,
+        `${environment.apiUrl}/circuits`,
+        `${environment.apiUrl}circuit/`
+     ];
+
+     ByPassApiUrls = [
+        `circuits`,
+        `circuit/`
+     ];
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -22,7 +30,7 @@ export class HttpOAuth2Interceptor implements HttpInterceptor {
         const { url, method, params, headers, body } = request;
         console.log('http request, url: ', url);
 
-        if (this.ByPassUrls.some(a => url.lastIndexOf(a) > -1  )) {
+        if (this.ByPassFullUrls.some(a => url.lastIndexOf(a) > -1  )) {
             return next.handle(request)
         }
 
@@ -30,8 +38,18 @@ export class HttpOAuth2Interceptor implements HttpInterceptor {
         const token = user?.token ?? '';
         
         if (token.length === 0) {
-            this.authenticationService.login()
-            return of(new HttpResponse({ body: {} }))
+            // public endpoints
+            if (this.ByPassApiUrls.some(a => url.startsWith(a) )) {
+                return next.handle(request.clone({
+                    url: environment.apiUrl + request.url,
+                    headers: new HttpHeaders({ 
+                        'timezoneOffset': new Date().getTimezoneOffset()
+                    }),
+                }));
+            }  else {
+                this.authenticationService.login()
+                return of(new HttpResponse({ body: {} }))
+            }
         }
 
         return of(null)
@@ -53,10 +71,8 @@ export class HttpOAuth2Interceptor implements HttpInterceptor {
         function handleRoute() {
             console.log(`going to  ${url}`);
 
-            const baseUrl = environment.apiUrl;
-
             return next.handle(request.clone({
-                url: baseUrl + request.url,
+                url: environment.apiUrl + request.url,
                 headers: new HttpHeaders({ 
                     Authorization: `Bearer ${token}`,
                     'email': user.email,

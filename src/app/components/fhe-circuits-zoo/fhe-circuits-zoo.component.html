@@ -1,12 +1,13 @@
 <div style="display: flex; width: 100%;align-items: baseline;justify-content: space-between;">
   <h1>&nbsp;Circuits Zoo</h1> 
-  <div style="margin-right: 5%;">
-    <mat-form-field >
-      <mat-label>Search</mat-label>
-      <input matInput placeholder="Filter by name" formControlName="param2" #filter>
-    </mat-form-field>&nbsp;
-    <button mat-stroked-button color="accent" (click)="filterResults(filter.value)">Search</button>
-  </div>
+  <form [formGroup]="searchForm" class="notes-form" style="margin-right: 5px;">
+      <mat-form-field >
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Filter by name" formControlName="searchName" #filter>
+      </mat-form-field>&nbsp;
+      <button mat-stroked-button color="accent" (click)="filterResults(filter.value)">Search</button>
+</form>
+
 </div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
