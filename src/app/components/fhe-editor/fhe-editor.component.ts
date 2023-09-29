@@ -18,15 +18,16 @@ export class FheEditorComponent implements OnInit {
 
   theme = 'vs-dark';
 
-  codeModel: CodeModel = {
-    language: 'python',
-    uri: 'main.py',
-    value: `
+  defaultSrc = `
 @fhe.compiler({"x": "encrypted"})
 def circuit(x):
     return x + 42
 
-inputset = range(10)`,
+inputset = range(10)`
+  codeModel: CodeModel = {
+    language: 'python',
+    uri: 'main.py',
+    value: this.defaultSrc,
   };
 
   options = {
@@ -51,15 +52,15 @@ inputset = range(10)`,
     private formBuilder: UntypedFormBuilder,
     private http: HttpClient) {
 
-   
+      this.route.queryParams.subscribe(async params => {
+        this.persitedId = params['id'] ?? '';
+          await this.reload()
+      })
   }
 
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(async params => {
-      this.persitedId = params['id'] ?? '';
-        await this.reload()
-    })
+   
   }
 
   async reload() {
@@ -72,18 +73,17 @@ inputset = range(10)`,
 
       name = c['name'];
       description = c['description'];
-      this.codeModel = {
-        language: 'python',
-        uri: 'main.py',
-        value: c['src'] };
+      this.codeModel = {...this.codeModel, value: c['src'] };
 
       this.spinning = false;
     } else {
       name = this.newName()
+      this.codeModel = {...this.codeModel, value: this.defaultSrc };
     }
 
     this.notesForm = this.formBuilder.group({
       name: [name, Validators.required],
+      hideSrc: [false],
       description,
     });
   }
@@ -116,7 +116,11 @@ inputset = range(10)`,
             name : this.fval['name'].value,
             description : this.fval['description'].value
           }));
+          console.log('edit-circuit', r)
           this.fheError = r.exception ?? '';
+        if (!this.persitedId) {
+          this.router.navigate([`/fhe-editor`], { queryParams: {id: r.id}})
+        }
     } finally {
       this.spinning = false;
     }

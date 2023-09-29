@@ -25,12 +25,15 @@
   <mat-form-field class="notes-full-width">
     <mat-label>Circuit Name</mat-label>
     <input matInput placeholder="name of the curcuit" formControlName="name">
+    <mat-checkbox color="primary"
+    formControlName="hideSrc">Source Code Is Private</mat-checkbox>
   </mat-form-field>
 
   <mat-form-field class="notes-full-width">
     <mat-label>Description</mat-label>
     <textarea matInput placeholder="curcuit details..." formControlName="description"></textarea>
   </mat-form-field>
+  
 </form>
 <p *ngIf="spinning"><mat-spinner></mat-spinner></p>
 <p *ngIf="fheError" style="color: red;">{{fheError}}</p>

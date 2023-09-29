@@ -12,7 +12,7 @@ import { firstValueFrom } from 'rxjs';
 })
 
 export class FheCircuitsZooComponent implements OnInit{
-  displayedColumns: string[] = ['name', 'email', 'created'];
+  displayedColumns: string[] = ['name', 'email', 'polynomial_size', 'created'];
   dataSource = [];
   spinning = false;
   searchForm: UntypedFormGroup;

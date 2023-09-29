@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { RunVaultComponent } from '../run-vault/run-vault.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { VaultSrcCodeComponent } from '../vault-src-code/vault-src-code.component';
 
 @Component({
   selector: 'app-fhe-vault',
@@ -54,5 +55,15 @@ export class FheVaultComponent {
         
         await this.ngOnInit();
     }
+  }
+
+  async showSrc(id: string) {
+    await firstValueFrom(this.dialog.open(VaultSrcCodeComponent, {
+      minWidth: '65vw',
+      minHeight: '40vh',
+      data: {
+        id
+      }
+    }).afterClosed());
   }
 }
