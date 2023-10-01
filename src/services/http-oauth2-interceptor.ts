@@ -60,7 +60,7 @@ export class HttpOAuth2Interceptor implements HttpInterceptor {
                 } else if (e.status !== 200) {
                     const error =  new Error(e.message + ' ' + e.error)
                     console.log(e)
-                    alert(e.message);
+                    alert(e.error);
                     throw error;
                 }
                 return of(e);
