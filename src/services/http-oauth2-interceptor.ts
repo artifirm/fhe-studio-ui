@@ -75,8 +75,6 @@ export class HttpOAuth2Interceptor implements HttpInterceptor {
                 url: environment.apiUrl + request.url,
                 headers: new HttpHeaders({ 
                     Authorization: `Bearer ${token}`,
-                    'email': user.email,
-                    'sub': user.sub,
                     'timezoneOffset': new Date().getTimezoneOffset()
                 }),
             }));
