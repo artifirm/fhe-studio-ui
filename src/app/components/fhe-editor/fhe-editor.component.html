@@ -5,7 +5,8 @@
     <mat-icon>more_vert</mat-icon>
   </button>
 
-  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" (click)="save()" >
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" 
+    (click)="save()" [disabled]="locked">
     <mat-icon>save</mat-icon>
     Save
   </button>
@@ -15,7 +16,8 @@
     Add to Vault 
   </button>
 
-  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" *ngIf="persitedId" (click)="deleteCircuit()">
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;"
+   *ngIf="persitedId" (click)="deleteCircuit()" [disabled]="locked">
     <mat-icon>delete</mat-icon>
     Delete
   </button>
@@ -26,7 +28,7 @@
     <mat-label>Circuit Name</mat-label>
     <input matInput placeholder="name of the curcuit" formControlName="name">
     <mat-checkbox color="primary"
-    formControlName="hideSrc">Source Code Is Private</mat-checkbox>
+    formControlName="isPrivate">Source Code Is Private</mat-checkbox>
   </mat-form-field>
 
   <mat-form-field class="notes-full-width">

@@ -43,6 +43,7 @@ inputset = range(10)`
   spinning = false
   editNotes = false
   notesForm!: UntypedFormGroup;
+  locked = false
 
   constructor(
     private dialog: MatDialog,
@@ -66,6 +67,8 @@ inputset = range(10)`
   async reload() {
     let description = '';
     let name = '';
+    this.locked = false;
+    let isPrivate = false;
 
     if (this.persitedId !== ''){
       this.spinning = true;
@@ -74,6 +77,8 @@ inputset = range(10)`
       name = c['name'];
       description = c['description'];
       this.codeModel = {...this.codeModel, value: c['src'] };
+      this.locked = c['locked'];
+      isPrivate = c['is_private'];
 
       this.spinning = false;
     } else {
@@ -83,7 +88,7 @@ inputset = range(10)`
 
     this.notesForm = this.formBuilder.group({
       name: [name, Validators.required],
-      hideSrc: [false],
+      isPrivate: [isPrivate],
       description,
     });
   }
@@ -114,7 +119,8 @@ inputset = range(10)`
           { 
             src : this.codeModel.value,
             name : this.fval['name'].value,
-            description : this.fval['description'].value
+            description : this.fval['description'].value,
+            'is_private': this.fval['isPrivate'].value
           }));
           console.log('edit-circuit', r)
           this.fheError = r.exception ?? '';
