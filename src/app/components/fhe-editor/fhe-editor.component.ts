@@ -163,4 +163,8 @@ inputset = range(10)`
       this.router.navigate(['']);
     }
   }
+
+  isAuthenticated(): boolean {
+    return this.authenticationService.isAuthenticated()
+  }
 }

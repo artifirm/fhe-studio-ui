@@ -6,7 +6,7 @@
   </button>
 
   <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" 
-    (click)="save()" [disabled]="locked">
+    (click)="save()" [disabled]="!(!locked || !isAuthenticated())">
     <mat-icon>save</mat-icon>
     Save
   </button>
@@ -17,7 +17,7 @@
   </button>
 
   <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;"
-   *ngIf="persitedId" (click)="deleteCircuit()" [disabled]="locked">
+   *ngIf="persitedId" (click)="deleteCircuit()" [disabled]="!(!locked || !isAuthenticated())">
     <mat-icon>delete</mat-icon>
     Delete
   </button>
