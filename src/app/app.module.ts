@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FheVaultComponent } from './components/fhe-vault/fhe-vault.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { RunVaultComponent } from './components/run-vault/run-vault.component';
+import { VaultSrcCodeComponent } from './components/vault-src-code/vault-src-code.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RunVaultComponent } from './components/run-vault/run-vault.component';
     FheCircuitsZooComponent,
     FheVaultComponent,
     ConfirmDialogComponent,
-    RunVaultComponent
+    RunVaultComponent,
+    VaultSrcCodeComponent
   ],
   imports: [
     BrowserModule,

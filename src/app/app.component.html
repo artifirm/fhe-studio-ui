@@ -3,7 +3,7 @@
     <button mat-icon-button (click)="isExpanded = !isExpanded">
         <mat-icon>menu</mat-icon>
     </button>
-    <a  mat-button [routerLink]="['']"><h1>Homomorfic Encryption Studio</h1></a>
+    <a  mat-button [routerLink]="['']"><h1>Homomorphic Encryption Studio</h1></a>
     <span style="flex: 1 1 auto;"></span>
     <div>
         <button mat-icon-button style="width:auto" [matMenuTriggerFor]="accountMenu">
@@ -51,6 +51,11 @@
                     <mat-icon>api</mat-icon>
                     API Keys
                   </button>
+            </mat-list-item>
+            <mat-list-item style="margin-top: 10%;">
+                <a mat-flat-button  style="width: 100%;" href="https://github.com/artifirm/fhe-studio-docs" target="_blank">
+                    Documentation
+                </a>
             </mat-list-item>
         </mat-nav-list>
      </mat-sidenav>

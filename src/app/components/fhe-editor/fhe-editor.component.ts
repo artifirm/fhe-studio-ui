@@ -18,15 +18,16 @@ export class FheEditorComponent implements OnInit {
 
   theme = 'vs-dark';
 
-  codeModel: CodeModel = {
-    language: 'python',
-    uri: 'main.py',
-    value: `
+  defaultSrc = `
 @fhe.compiler({"x": "encrypted"})
 def circuit(x):
     return x + 42
 
-inputset = range(10)`,
+inputset = range(10)`
+  codeModel: CodeModel = {
+    language: 'python',
+    uri: 'main.py',
+    value: this.defaultSrc,
   };
 
   options = {
@@ -42,6 +43,7 @@ inputset = range(10)`,
   spinning = false
   editNotes = false
   notesForm!: UntypedFormGroup;
+  locked = false
 
   constructor(
     private dialog: MatDialog,
@@ -51,20 +53,22 @@ inputset = range(10)`,
     private formBuilder: UntypedFormBuilder,
     private http: HttpClient) {
 
-   
+      this.route.queryParams.subscribe(async params => {
+        this.persitedId = params['id'] ?? '';
+          await this.reload()
+      })
   }
 
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(async params => {
-      this.persitedId = params['id'] ?? '';
-        await this.reload()
-    })
+   
   }
 
   async reload() {
     let description = '';
     let name = '';
+    this.locked = false;
+    let isPrivate = false;
 
     if (this.persitedId !== ''){
       this.spinning = true;
@@ -72,18 +76,19 @@ inputset = range(10)`,
 
       name = c['name'];
       description = c['description'];
-      this.codeModel = {
-        language: 'python',
-        uri: 'main.py',
-        value: c['src'] };
+      this.codeModel = {...this.codeModel, value: c['src'] };
+      this.locked = c['locked'];
+      isPrivate = c['is_private'];
 
       this.spinning = false;
     } else {
       name = this.newName()
+      this.codeModel = {...this.codeModel, value: this.defaultSrc };
     }
 
     this.notesForm = this.formBuilder.group({
       name: [name, Validators.required],
+      isPrivate: [isPrivate],
       description,
     });
   }
@@ -114,9 +119,14 @@ inputset = range(10)`,
           { 
             src : this.codeModel.value,
             name : this.fval['name'].value,
-            description : this.fval['description'].value
+            description : this.fval['description'].value,
+            'is_private': this.fval['isPrivate'].value
           }));
+          console.log('edit-circuit', r)
           this.fheError = r.exception ?? '';
+        if (!this.persitedId) {
+          this.router.navigate([`/fhe-editor`], { queryParams: {id: r.id}})
+        }
     } finally {
       this.spinning = false;
     }
@@ -152,5 +162,9 @@ inputset = range(10)`,
         this.http.delete<any>(`/delete-circuit/${this.persitedId}`));
       this.router.navigate(['']);
     }
+  }
+
+  isAuthenticated(): boolean {
+    return this.authenticationService.isAuthenticated()
   }
 }

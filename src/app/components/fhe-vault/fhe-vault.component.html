@@ -4,24 +4,21 @@
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
   
-    <!-- Name Column -->
+    <!-- Action Column -->
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let element"> 
         <button mat-stroked-button color="accent" (click)="runCircuit(element.id)">Run Circuit</button> &nbsp;
         <button mat-button (click)="deleteVaultItem(element.id)"><mat-icon>delete</mat-icon></button>
-        <!-- <a [routerLink]="['/fhe-editor']" [queryParams]="{id: element.id}">
-          {{element.name}}
-        </a> -->
       </td>
     </ng-container>
   
-    <!-- Email Column -->
+    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element">
-              <a class="title" [routerLink]="['/fhe-editor']" [queryParams]="{id: element.circuit_id}">
-        {{element.name}}</a></td>
+          <button  mat-stroked-button color="primary" (click)="showSrc(element.circuit_id)">
+          {{element.name}}</button></td>
     </ng-container>
   
      <!-- Email Column -->
