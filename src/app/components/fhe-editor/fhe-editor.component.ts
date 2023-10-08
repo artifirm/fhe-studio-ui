@@ -189,4 +189,16 @@ inputset = range(10)`
       await this.save();
     }
   }
+
+  async showMlir() {
+  
+    const r = await firstValueFrom(this.http.get<any>(`/mlir/${this.persitedId}`));
+    const res = await firstValueFrom(this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'MLIR: Compiled Circuit',
+        message: r['mlir']
+      }
+    }).afterClosed())
+
+  }
 }

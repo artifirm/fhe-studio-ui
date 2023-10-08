@@ -34,7 +34,7 @@ export class VaultSrcCodeComponent implements OnInit {
     }
 
   async ngOnInit() {
-    const c = await firstValueFrom(this.http.post<any>(`circuit/${this.persitedId}`, {}))
+    const c = await firstValueFrom(this.http.get<any>(`vault-circuit/${this.persitedId}`, {}))
     this.codeModel = {...this.codeModel, value: c['src'] };
   }
 }
