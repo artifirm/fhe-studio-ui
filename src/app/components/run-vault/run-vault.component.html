@@ -4,17 +4,16 @@
 
 <div mat-dialog-content>
   <form [formGroup]="paramsForm">
-    <div *ngFor="let p of paramsDesc; index as indx">
+    <div *ngFor="let p of paramsDesc">
       <mat-form-field>
-        <mat-label>Param {{indx + 1}}</mat-label>
-        <input matInput placeholder="encrypted value" [formControlName]='"param" + (indx+1)'>
-        
+        <mat-label>{{p.name}}</mat-label>
+        <input matInput  type="number" placeholder="value {{p.name}}" [formControlName]="p.name">
       </mat-form-field>
   </div>
-    <mat-form-field *ngIf="paramsDesc.length>0">
+    <!-- <mat-form-field *ngIf="paramsDesc.length>0">
         <mat-label>Password</mat-label>
         <input type="password" matInput placeholder="plain value" formControlName="password" >
-      </mat-form-field>
+      </mat-form-field> -->
 </form>
 
 <mat-chip-listbox disabled *ngIf="stage >= 0 ">

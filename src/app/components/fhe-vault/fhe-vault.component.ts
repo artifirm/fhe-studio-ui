@@ -34,7 +34,8 @@ export class FheVaultComponent {
 
   async runCircuit(id: string) {
     await firstValueFrom(this.dialog.open(RunVaultComponent, {
-      maxWidth: '400px',
+      minWidth: '20vw',
+      minHeight: '20vh',
       data: {
         id
       }
