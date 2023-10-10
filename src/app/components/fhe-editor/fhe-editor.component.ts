@@ -69,6 +69,7 @@ inputset = range(10)`
     let name = '';
     this.locked = false;
     let isPrivate = false;
+    let isPublished = false;
 
     if (this.persitedId !== ''){
       this.spinning = true;
@@ -78,7 +79,8 @@ inputset = range(10)`
       description = c['description'];
       this.codeModel = {...this.codeModel, value: c['src'] };
       this.locked = c['locked'];
-      isPrivate = c['is_private'];
+      isPrivate = c['is_private'] ?? false;
+      isPublished = c['is_published'] ?? false;
 
       this.spinning = false;
     } else {
@@ -89,6 +91,7 @@ inputset = range(10)`
     this.notesForm = this.formBuilder.group({
       name: [name, Validators.required],
       isPrivate: [isPrivate],
+      isPublished: [isPublished],
       description,
     });
   }
@@ -120,7 +123,8 @@ inputset = range(10)`
             src : this.codeModel.value,
             name : this.fval['name'].value,
             description : this.fval['description'].value,
-            'is_private': this.fval['isPrivate'].value
+            'is_private': this.fval['isPrivate'].value,
+            'is_published': this.fval['isPublished'].value
           }));
           console.log('edit-circuit', r)
           this.fheError = r.exception ?? '';
@@ -166,5 +170,35 @@ inputset = range(10)`
 
   isAuthenticated(): boolean {
     return this.authenticationService.isAuthenticated()
+  }
+
+  get publishedButtonColor(): string {
+    return this.fval['isPublished'].value ? 'primary': 'basic';
+  }
+
+  async publish() {
+    const res = await firstValueFrom(this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Publish Circuit',
+        message: 'Do you want to publish this circuit to Circuit Zoo?'
+      }
+    }).afterClosed());
+
+    if (res) {
+      this.fval['isPublished'].setValue(true);
+      await this.save();
+    }
+  }
+
+  async showMlir() {
+  
+    const r = await firstValueFrom(this.http.get<any>(`/mlir/${this.persitedId}`));
+    const res = await firstValueFrom(this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'MLIR: Compiled Circuit',
+        message: r['mlir']
+      }
+    }).afterClosed())
+
   }
 }

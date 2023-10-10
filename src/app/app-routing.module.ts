@@ -8,10 +8,11 @@ import { FheVaultComponent } from './components/fhe-vault/fhe-vault.component';
 const routes: Routes = [
   { path: '', component: FheCircuitsZooComponent },
   { path: 'circuits-zoo', component: FheCircuitsZooComponent },
+  { path: 'my-circuits', component: FheCircuitsZooComponent },
   { path: 'fhe-editor', component: FheEditorComponent },
   { path: 'oauth2', component: Oauth2CallbackComponent },
   { path: 'fhe-vault', component: FheVaultComponent },
- 
+   
 ];
 
 @NgModule({

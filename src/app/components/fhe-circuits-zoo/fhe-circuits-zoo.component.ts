@@ -12,7 +12,7 @@ import { firstValueFrom } from 'rxjs';
 })
 
 export class FheCircuitsZooComponent implements OnInit{
-  displayedColumns: string[] = ['name', 'email', 'polynomial_size', 'created'];
+  displayedColumns: string[] = ['name', 'complexity',  'created'];
   dataSource = [];
   spinning = false;
   searchForm: UntypedFormGroup;
@@ -39,7 +39,8 @@ export class FheCircuitsZooComponent implements OnInit{
   async load(name: string) {
     this.spinning = true;
     try {
-      const r = await firstValueFrom(this.http.get<any>(`circuits?name=${name}`));
+      const api = this.isShowMyCircuits ? 'my-circuits':'circuits';
+      const r = await firstValueFrom(this.http.get<any>(`${api}?name=${name}`));
       this.dataSource = r;
     } finally {
       this.spinning = false;
@@ -47,6 +48,10 @@ export class FheCircuitsZooComponent implements OnInit{
   }
 
   filterResults(name: string) : void {
-    this.router.navigate([`/circuits-zoo`], { queryParams: {name}})
+    this.router.navigate([], { queryParams: {name}})
+  }
+
+  get isShowMyCircuits() : boolean {
+    return this.router.url.startsWith('/my-circuits')
   }
 }
