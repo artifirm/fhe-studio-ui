@@ -5,7 +5,14 @@
 ## Fully Homomorphic Encryption
 Fully Homomorphic Encryption (FHE) is a groundbreaking cryptographic technique that allows computations to be performed on encrypted data without the need to decrypt it first. This means that data can remain confidential while still being processed, opening up new possibilities for secure data outsourcing and privacy-preserving computations. 
 
-## Circuit Programing
+## Cloud 
+IDE is freely available at https://fhe-studio.com, You need a Gmail account to log in
+
+## Docker
+[The fhe-studio image is here.](https://hub.docker.com/r/alextmn/fhe-studio)
+Then go to http://localhost:5000 and log in as default user
+
+## Circuit Programming
 Please see [FHE Concrete](https://docs.zama.ai/concrete/getting-started/quick_start) engine for quick start and functions supported. 
 
 ## Secure Computation on Encrypted Data
