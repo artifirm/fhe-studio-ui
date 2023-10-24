@@ -3,16 +3,19 @@
   <form style="display: flex; flex-direction: column;" [formGroup]="createUserForm">
     <mat-form-field class="full-width">
       <input matInput placeholder="Username" formControlName="username" required>
+      <mat-error> Please enter a valid email address </mat-error>
     </mat-form-field>
     <mat-form-field class="full-width">
       <input matInput type="password" placeholder="Password" formControlName="password" required>
+      <mat-error>at least 6 symbols </mat-error>
     </mat-form-field>
     <mat-form-field class="full-width">
         <input matInput type="password" placeholder="once more" formControlName="passwordOnceMore" required>
       </mat-form-field>
   </form>
+  <div style="color: red;" *ngIf="errorString">{{errorString}}</div>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions *ngIf="!loading">
     <button mat-button (click)="onDismiss()">Dismiss</button>
     <button mat-button (click)="onConfirm()" cdkFocusInitial color="accent">Submit</button>
 </div>

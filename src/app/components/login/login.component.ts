@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthProvider, AuthenticationService } from 'src/services/authentication-service';
 
@@ -16,10 +18,12 @@ export class LoginComponent {
   devProvider: AuthProvider | undefined;
   fheStudioProvider: AuthProvider | undefined;
   googleProvider: AuthProvider | undefined;
+  errorStr = '';
 
   constructor(public dialogRef: MatDialogRef<LoginComponent>,
     private formBuilder: UntypedFormBuilder,
-    private authenticationService: AuthenticationService){
+    private authenticationService: AuthenticationService,
+    private http: HttpClient){
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -42,15 +46,24 @@ export class LoginComponent {
 
   onConfirmWithDev(): void {
     const p = this.devProvider!!;
-    const url = `${p.oauth2LoginUrl}&client_id=${p.oauth2ClientId}`;
+    const url = `${p.oauth2LoginUrl}`;
     window.location.href = url;
     //this.dialogRef.close(true);
   }
 
-  onConfirm(): void {
-    
-    if (this.loginForm.valid) {
-      this.dialogRef.close(false);
+  async onConfirm() {
+    this.errorStr = '';
+    if (!this.loginForm.valid) {
+      return;
+    }
+    try {
+      const r = await firstValueFrom(this.http.post<any>('oid-fhe-login', 
+        { username: this.username, password: this.password }))
+      const p = this.fheStudioProvider!!;
+      const url = `${p.oauth2LoginUrl}${r.code}`;
+      window.location.href = url;
+    } catch(e:any) {
+      this.errorStr = e.message;
     }
   }
   

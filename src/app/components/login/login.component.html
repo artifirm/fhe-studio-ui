@@ -8,6 +8,7 @@
       <input matInput type="password" placeholder="Password" formControlName="password" required>
     </mat-form-field>
   </form>
+  <div style="color: red;" *ngIf="errorStr">{{errorStr}}</div>
 </div>
 <div mat-dialog-actions>
   <div style="flex-direction: column">

@@ -13,13 +13,17 @@ export class HttpOAuth2Interceptor implements HttpInterceptor {
     ByPassFullUrls = [
         `${environment.apiUrl}/circuits`,
         `${environment.apiUrl}circuit/`,
+        `${environment.apiUrl}fhe-create-user`,
+        `${environment.apiUrl}oid-fhe-login`,
         ...Object.entries(environment.authProviders).map(a => a[1].oauth2TokenUrl),
         ...Object.entries(environment.authProviders).map(a => a[1].oauth2UserInfo),
      ];
 
      ByPassApiUrls = [
         `circuits`,
-        `circuit/`
+        `circuit/`,
+        `fhe-create-user`,
+        'oid-fhe-login'
      ];
 
     constructor(
