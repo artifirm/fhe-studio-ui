@@ -15,6 +15,12 @@
             <button mat-menu-item (click)="login()" *ngIf="!(currentUserEmail$ | async)">
                 <mat-icon>login</mat-icon>Login
             </button>
+            <button mat-menu-item (click)="createNewUser()" *ngIf="!(currentUserEmail$ | async)">
+                <mat-icon>person</mat-icon>Create New User
+            </button>
+            <button mat-menu-item (click)="changePassword()" *ngIf="currentUserEmail$ | async">
+                <mat-icon>person</mat-icon>Change Password
+            </button>
             <button mat-menu-item (click)="logout()" *ngIf="currentUserEmail$ | async">
                 <mat-icon>exit_to_app</mat-icon>Logout
             </button>

@@ -1,8 +1,25 @@
 <h1 mat-dialog-title>Authentication</h1>
 <div mat-dialog-content>
-  <p>You need to log in to procceed</p>
+  <form style="display: flex; flex-direction: column;" [formGroup]="loginForm">
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Username" formControlName="username" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="password" placeholder="Password" formControlName="password" required>
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onDismiss()" cdkFocusInitial>No Thanks</button>
-  <button mat-button (click)="onConfirm()"  color="accent"><mat-icon>person</mat-icon>Log In</button>
+  <div style="flex-direction: column">
+    <div style="flex-direction: row;">
+      <button mat-button (click)="onDismiss()">No Thanks</button>
+      <button mat-button (click)="onConfirm()" cdkFocusInitial color="accent" *ngIf="fheStudioProvider"><mat-icon>person</mat-icon>Log In</button>
+      <button mat-button (click)="onConfirmWithDev()" *ngIf="devProvider">Demo User</button>
+      <button mat-button (click)="onConfirmWithGoogle()" color="warn" *ngIf="googleProvider">With Google</button>
+    </div>
+    <div style="justify-content: flex-end;">
+      <button mat-button (click)="createNewUser()" style="font-size: x-small; color: blue; ">I don't have an
+        account</button>
+    </div>
+  </div>
 </div>

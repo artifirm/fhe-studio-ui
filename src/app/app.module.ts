@@ -18,6 +18,8 @@ import { FheVaultComponent } from './components/fhe-vault/fhe-vault.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { RunVaultComponent } from './components/run-vault/run-vault.component';
 import { VaultSrcCodeComponent } from './components/vault-src-code/vault-src-code.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
+import { PasswordChangeComponent } from './components/password-change/password-change.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { VaultSrcCodeComponent } from './components/vault-src-code/vault-src-cod
     FheVaultComponent,
     ConfirmDialogComponent,
     RunVaultComponent,
-    VaultSrcCodeComponent
+    VaultSrcCodeComponent,
+    CreateUserComponent,
+    PasswordChangeComponent
   ],
   imports: [
     BrowserModule,

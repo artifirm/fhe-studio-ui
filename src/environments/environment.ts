@@ -5,13 +5,25 @@
 export const environment = {
     production: false,
     apiUrl: 'api/',
-    oauth2ClientId:"not-set",
-    oauth2ClientPassword:"not-set",
-    oauth2LoginUrl: "/oauth2?code=123",
-    oauth2TokenUrl: "/dev-token?",
-    oauth2UserInfo: "/dev-user",
-    oauth2LogoutUrl: "https://oauth2.googleapis.com/revoke",
-    oauth2WellKnown:"https://accounts.google.com/.well-known/openid-configuration"
+    authProviders: [
+        {
+            id: 'dev',
+            name: 'Test Demo User',
+            oauth2ClientId: 'not-set',
+            oauth2ClientPassword: 'not-set',
+            oauth2LoginUrl: '/oauth2?code=dev-code',
+            oauth2TokenUrl: '/dev-token?',
+            oauth2UserInfo: '/dev-user',
+        }, {
+            id: 'fheStudio',
+            name: 'Log In',
+            oauth2ClientId: 'not-set',
+            oauth2ClientPassword: 'not-set',
+            oauth2LoginUrl: '/oauth2?code=fhe',
+            oauth2TokenUrl: '/api/oid-token?',
+            oauth2UserInfo: '/api/oid-user-info',
+        }
+    ]
 };
 
 /*
