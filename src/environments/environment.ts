@@ -32,7 +32,7 @@ export const environment = {
             oauth2UserInfo: "https://openidconnect.googleapis.com/v1/userinfo",
             oauth2LogoutUrl: "https://oauth2.googleapis.com/revoke",
             oauth2WellKnown: "https://accounts.google.com/.well-known/openid-configuration"
-          },
+        },
     ]
 };
 
