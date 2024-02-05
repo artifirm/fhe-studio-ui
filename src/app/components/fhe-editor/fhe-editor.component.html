@@ -5,6 +5,12 @@
     <mat-icon>more_vert</mat-icon>
   </button>
 
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" (click)="play()"
+    color="accent">
+    <mat-icon>play_circle</mat-icon>
+    Run
+  </button>
+
   <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" (click)="save()"
     [disabled]="!(!locked || !isAuthenticated())">
     <mat-icon>save</mat-icon>
@@ -68,5 +74,5 @@
       {{logPanelOpenState ? 'click to collapse' : ''}}
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <p style=" white-space: pre-wrap;">{{ output }}</p>
+  <p style="white-space: pre-wrap;">{{ output }}</p>
 </mat-expansion-panel>

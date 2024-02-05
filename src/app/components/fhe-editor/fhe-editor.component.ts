@@ -205,7 +205,7 @@ print(x, "+", y, "=", clear_evaluation, "=", homomorphic_evaluation)`
 
   async showMlir() {
   
-    const r = await firstValueFrom(this.http.get<any>(`/mlir/${this.persitedId}`));
+    const r = await firstValueFrom(this.http.get<any>(`mlir/${this.persitedId}`));
     const res = await firstValueFrom(this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'MLIR: Compiled Circuit',
@@ -219,4 +219,18 @@ print(x, "+", y, "=", clear_evaluation, "=", homomorphic_evaluation)`
     return Math.min(a,b);
   }
 
+  async play() {
+    this.spinning = true;
+    try {
+      const r = await firstValueFrom(
+        this.http.post<any>('play-circuit', 
+          { 
+            src : this.codeModel.value,
+          }));
+          this.fheError = r.exception ?? '';
+          this.output= r.output ?? '';
+    } finally {
+      this.spinning = false;
+    }
+  }
 }

@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 export class HttpOAuth2Interceptor implements HttpInterceptor {
 
     ByPassFullUrls = [
+        `${environment.apiUrl}mlir`,
+        `${environment.apiUrl}play-circuit`,
         `${environment.apiUrl}/circuits`,
         `${environment.apiUrl}circuit/`,
         `${environment.apiUrl}fhe-create-user`,
@@ -20,6 +22,8 @@ export class HttpOAuth2Interceptor implements HttpInterceptor {
      ];
 
      ByPassApiUrls = [
+        `mlir`,
+        `play-circuit`,
         `circuits`,
         `circuit/`,
         `fhe-create-user`,
