@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/model/user';
-import { AuthenticationService } from 'src/services/authentication-service';
+import { AuthProvider, AuthenticationService } from 'src/services/authentication-service';
+
 
 @Component({
   selector: 'app-oauth2-callback',
@@ -21,16 +22,27 @@ export class Oauth2CallbackComponent {
 
   async ngOnInit() {
     const params = await firstValueFrom(this.route.queryParams);
-    const code = params['code']
+    const code = params['code'] ?? '';
     console.log(`auth code: ${code}`);
+    
+    let authProvider: AuthProvider;
+    if (code === 'dev-code') {
+      authProvider = this.authenticationService.authProvider('dev')!!;
+    } else if (code.startsWith('fhe')) {
+      authProvider = this.authenticationService.authProvider('fheStudio')!!;
+    } else {
+      authProvider = this.authenticationService.authProvider('google')!!;
+    }
+    
+    console.log(`using ${authProvider.name} authProvider`)
 
     const tokenResponse = await firstValueFrom(this.http.post<any>(
-      `${environment.oauth2TokenUrl}&code=${code}&client_id=${environment.oauth2ClientId}&client_secret=${environment.oauth2ClientPassword}`, {}));
+      `${authProvider.oauth2TokenUrl}&code=${code}&client_id=${authProvider.oauth2ClientId}&client_secret=${authProvider.oauth2ClientPassword}`, {}));
 
     const access_token = tokenResponse['access_token'];
     
     const userInfo = await firstValueFrom(this.http.get<any>(
-      environment.oauth2UserInfo,
+      authProvider.oauth2UserInfo,
       { headers: new HttpHeaders({ Authorization: `Bearer ${access_token}` }) }));
 
     console.log(`Logged User:`, userInfo)

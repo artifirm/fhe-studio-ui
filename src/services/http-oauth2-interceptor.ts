@@ -11,15 +11,23 @@ import { environment } from 'src/environments/environment';
 export class HttpOAuth2Interceptor implements HttpInterceptor {
 
     ByPassFullUrls = [
-        environment.oauth2UserInfo,
-        environment.oauth2TokenUrl,
+        `${environment.apiUrl}mlir`,
+        `${environment.apiUrl}play-circuit`,
         `${environment.apiUrl}/circuits`,
-        `${environment.apiUrl}circuit/`
+        `${environment.apiUrl}circuit/`,
+        `${environment.apiUrl}fhe-create-user`,
+        `${environment.apiUrl}oid-fhe-login`,
+        ...Object.entries(environment.authProviders).map(a => a[1].oauth2TokenUrl),
+        ...Object.entries(environment.authProviders).map(a => a[1].oauth2UserInfo),
      ];
 
      ByPassApiUrls = [
+        `mlir`,
+        `play-circuit`,
         `circuits`,
-        `circuit/`
+        `circuit/`,
+        `fhe-create-user`,
+        'oid-fhe-login'
      ];
 
     constructor(
@@ -48,7 +56,8 @@ export class HttpOAuth2Interceptor implements HttpInterceptor {
                 }));
             }  else {
                 this.authenticationService.login()
-                return of(new HttpResponse({ body: {} }))
+                throw Error('authentication token is missing')
+                //return of(new HttpResponse({ body: [] }))
             }
         }
 

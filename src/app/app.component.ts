@@ -38,5 +38,13 @@ export class AppComponent {
     return url.some(a=> this.router.url === a) ? 'primary' : '';
   }
 
+  createNewUser(): void {
+    this.authenticationService.createNewUser();
+  }
+
+  changePassword(): void {
+    this.authenticationService.passwordChange();
+  }
+
 }
 

@@ -15,6 +15,12 @@
             <button mat-menu-item (click)="login()" *ngIf="!(currentUserEmail$ | async)">
                 <mat-icon>login</mat-icon>Login
             </button>
+            <button mat-menu-item (click)="createNewUser()" *ngIf="!(currentUserEmail$ | async)">
+                <mat-icon>person</mat-icon>Create New User
+            </button>
+            <button mat-menu-item (click)="changePassword()" *ngIf="currentUserEmail$ | async">
+                <mat-icon>person</mat-icon>Change Password
+            </button>
             <button mat-menu-item (click)="logout()" *ngIf="currentUserEmail$ | async">
                 <mat-icon>exit_to_app</mat-icon>Logout
             </button>
@@ -53,7 +59,7 @@
             </mat-list-item>
 
             <mat-list-item>
-                <button mat-flat-button  style="width: 100%;" [routerLink]="'api-keys'" [color]="primaryByUrl(['/api-keys'])">
+                <button mat-flat-button [disabled]="true" style="width: 100%;" [routerLink]="'api-keys'" [color]="primaryByUrl(['/api-keys'])">
                     <mat-icon>api</mat-icon>
                     API Keys
                   </button>
@@ -68,7 +74,7 @@
 
     <router-outlet></router-outlet>
     <footer style="padding: 1vw;">
-        <p>&copy; <a href="http://artifirm.com"> Artifirm Inc. 2023</a></p>
+        <p>&copy; <a href="http://artifirm.com"> Artifirm Inc. 2024</a></p>
         <p style="line-height:10px; font-size: 10px; color: darkgray;">Disclaimers<br>
             The information provided on the FHE Studio website is for general informational purposes only. While we strive to keep the information up to date and accurate, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on the website for any purpose.
             Any reliance you place on such information is therefore strictly at your own risk. In no event will we be liable for any loss or damage, including but not limited to indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of or in connection with the use of this website.

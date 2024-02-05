@@ -38,12 +38,16 @@ export class FheCircuitsZooComponent implements OnInit{
 
   async load(name: string) {
     this.spinning = true;
+    let r = [];
     try {
       const api = this.isShowMyCircuits ? 'my-circuits':'circuits';
-      const r = await firstValueFrom(this.http.get<any>(`${api}?name=${name}`));
-      this.dataSource = r;
+      console.log('here')
+      r = await firstValueFrom(this.http.get<any>(`${api}?name=${name}`));
+      console.log('there', r)
     } finally {
+      console.log('there there')
       this.spinning = false;
+      this.dataSource = r;
     }
   }
 

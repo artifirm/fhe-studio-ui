@@ -5,56 +5,73 @@
     <mat-icon>more_vert</mat-icon>
   </button>
 
-  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" 
-    (click)="save()" [disabled]="!(!locked || !isAuthenticated())">
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" (click)="play()"
+    color="accent">
+    <mat-icon>play_circle</mat-icon>
+    Run
+  </button>
+
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" (click)="save()"
+    [disabled]="!(!locked || !isAuthenticated())">
     <mat-icon>save</mat-icon>
     Save
   </button>
 
   <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" (click)="addToVault()" *ngIf="persitedId">
     <mat-icon>lock</mat-icon>
-    Add to Vault 
+    Add to Vault
   </button>
 
-  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" 
-    [color]="publishedButtonColor"
-   *ngIf="persitedId" (click)="publish()" [disabled]="!(!locked || !isAuthenticated())">
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" [color]="publishedButtonColor"
+    *ngIf="persitedId" (click)="publish()" [disabled]="!(!locked || !isAuthenticated())">
     <mat-icon>share</mat-icon>
     Publish
   </button>
 
-  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;"
-   *ngIf="persitedId" (click)="showMlir()" [disabled]="!(!locked || !isAuthenticated())">
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" *ngIf="persitedId" (click)="showMlir()">
     <mat-icon>hub</mat-icon>
-     MLIR
+    MLIR
   </button>
 
-  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;"
-   *ngIf="persitedId" (click)="deleteCircuit()" [disabled]="!(!locked || !isAuthenticated())">
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" *ngIf="persitedId" (click)="deleteCircuit()"
+    [disabled]="!(!locked || !isAuthenticated())">
     <mat-icon>delete</mat-icon>
     Delete
   </button>
 
-  
+
 </p>
-<form [formGroup]="notesForm" class="notes-form" *ngIf="editNotes" >
+<form [formGroup]="notesForm" class="notes-form" *ngIf="editNotes">
   <mat-form-field class="notes-full-width">
     <mat-label>Circuit Name</mat-label>
     <input matInput placeholder="name of the curcuit" formControlName="name">
-    <mat-checkbox color="primary"
-    formControlName="isPrivate">Source Code Is Private</mat-checkbox>
-    
-    <mat-checkbox color="primary"
-      formControlName="isPublished">Published to Circuits Zoo</mat-checkbox>
+    <mat-checkbox color="primary" formControlName="isPrivate">Source Code Is Private</mat-checkbox>
+
+    <mat-checkbox color="primary" formControlName="isPublished">Published to Circuits Zoo</mat-checkbox>
   </mat-form-field>
 
   <mat-form-field class="notes-full-width">
     <mat-label>Description</mat-label>
     <textarea matInput placeholder="curcuit details..." formControlName="description"></textarea>
   </mat-form-field>
-  
+
 </form>
 <p *ngIf="spinning"><mat-spinner></mat-spinner></p>
 <p *ngIf="fheError" style="color: red;">{{fheError}}</p>
+
 <ngs-code-editor style="height: 60vh;" [theme]="theme" [codeModel]="codeModel" [options]="options">
 </ngs-code-editor>
+
+<mat-expansion-panel (opened)="logPanelOpenState = true" (closed)="logPanelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Console Output
+    </mat-panel-title>
+    <mat-panel-description>
+      {{!logPanelOpenState && output ? '...' + output.substr( output.length - min(output.length, 80)) : ''}}
+      {{!logPanelOpenState && !output ? '[empty]' : ''}}
+      {{logPanelOpenState ? 'click to collapse' : ''}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <p style="white-space: pre-wrap;">{{ output }}</p>
+</mat-expansion-panel>
