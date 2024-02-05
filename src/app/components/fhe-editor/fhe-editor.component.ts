@@ -16,14 +16,25 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class FheEditorComponent implements OnInit {
 
+  logPanelOpenState = false;
+  output = '';
   theme = 'vs-dark';
 
-  defaultSrc = `
-@fhe.compiler({"x": "encrypted"})
-def circuit(x):
-    return x + 42
+  defaultSrc = `from concrete import fhe
+@fhe.compiler({"x": "encrypted", "y": "encrypted"})
+def add(x, y):
+    return x + y
 
-inputset = range(10)`
+inputset = [(2, 3), (0, 0), (1, 6), (7, 7), (7, 1)]
+circuit = add.compile(inputset)
+
+x = 4
+y = 4
+
+clear_evaluation = add(x, y)
+homomorphic_evaluation = circuit.encrypt_run_decrypt(x, y)
+
+print(x, "+", y, "=", clear_evaluation, "=", homomorphic_evaluation)`
   codeModel: CodeModel = {
     language: 'python',
     uri: 'main.py',
@@ -81,6 +92,7 @@ inputset = range(10)`
       this.locked = c['locked'];
       isPrivate = c['is_private'] ?? false;
       isPublished = c['is_published'] ?? false;
+      this.output= c['output'] ?? '';
 
       this.spinning = false;
     } else {
@@ -128,6 +140,7 @@ inputset = range(10)`
           }));
           console.log('edit-circuit', r)
           this.fheError = r.exception ?? '';
+          this.output= r.output ?? '';
         if (!this.persitedId) {
           this.router.navigate([`/fhe-editor`], { queryParams: {id: r.id}})
         }
@@ -201,4 +214,9 @@ inputset = range(10)`
     }).afterClosed())
 
   }
+
+  min(a: number,b: number): number {
+    return Math.min(a,b);
+  }
+
 }
