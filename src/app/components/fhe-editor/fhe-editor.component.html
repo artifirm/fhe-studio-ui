@@ -28,8 +28,7 @@
     Publish
   </button>
 
-  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" *ngIf="persitedId" (click)="showMlir()"
-    [disabled]="!(!locked || !isAuthenticated())">
+  <button mat-raised-button style="margin-left: 5px; margin-bottom: 5px;" *ngIf="persitedId" (click)="showMlir()">
     <mat-icon>hub</mat-icon>
     MLIR
   </button>
