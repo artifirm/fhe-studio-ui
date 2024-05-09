@@ -35,3 +35,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 ## Build
 
 Run `ng build --configuration=production` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+### Support Our Work
+
+If you've found a value in [FHE STUDIO](https://fhe-studio.com/), [consider supporting us](https://github.com/sponsors/artifirm). We're committed to keeping FHE-Studio open and accessible, and every contribution helps us expand the project and keep it accessible for everyone.
+Your support is crucial for our continued development and helps keep our content and tools available to everyone. Thank you for being part of our community!
+Ethereum address for crypto contributions :<b> 0x87e94591E62cFA14fAbdA3d8514dC2a507402E58</b>

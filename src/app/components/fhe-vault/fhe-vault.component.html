@@ -1,5 +1,8 @@
 <div style="display: flex; align-items: center;"><h1>&nbsp;Key Vault&nbsp;</h1>
   <img src="assets/fhe-enclave.png"></div>
+  <p style="margin: 15px;">This is a cloud default vault. The offline desktop FHE vault is still under development. 
+    However, you can always run <a href="https://github.com/artifirm/fhe-studio-api">a FHE cloud vault on-prem.</a></p>
+  <p style="margin: 10px;">The vault calls 3 separate REST services, encrypt, run and decrypt. They all combined in one UI button on this page for the demo purposes. </p>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
