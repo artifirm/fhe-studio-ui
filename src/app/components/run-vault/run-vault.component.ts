@@ -50,8 +50,9 @@ export class RunVaultComponent implements OnInit{
       this.http.post<any>(`vault/client-specs/${this.id}`, {}))
     
     console.log('client-specs resp_b64:', resp_b64)
+    const cs = JSON.parse(atob(resp_b64[0]));
 
-    const inputs = JSON.parse(atob(resp_b64[0]))['inputs'];
+    const inputs = cs['circuits'][0]['inputs'];
     console.log('client-specs:', inputs)
 
     const paramsDesc: ParamDesc[] = inputs
